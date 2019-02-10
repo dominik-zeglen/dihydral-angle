@@ -1,6 +1,7 @@
 from FilePDB import FilePDB
 from BackboneChain import BackboneStructure
 
+
 def run(pdbname):
     file_pdb = FilePDB(pdbname)
     file_pdb.loadData()
@@ -9,7 +10,12 @@ def run(pdbname):
     fi_psi_list = bbStruct.calculate_fi_psi()
     for fi_psi in fi_psi_list:
         print("{fi}\t{psi}".format(**fi_psi))
-        #print(fi_psi)
-    
-if __name__ == '__main__':
-    run('6e8z')
+
+
+def get_from_ftp(pdbname):
+    return pdbname
+
+
+if __name__ == "__main__":
+    run("6e8z")
+
