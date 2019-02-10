@@ -8,6 +8,8 @@ TEMP_FILE_NAME = "temp.gz"
 
 
 def get_pdb_info(pdb_name):
+    # First check if file exists, then decide if it should be
+    # downloaded in the first place
     try:
         open("data/" + pdb_name + ".pdb")
     except IOError:
