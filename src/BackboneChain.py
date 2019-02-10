@@ -4,7 +4,7 @@ Created on 3 lut 2019
 @author: Basia
 """
 
-from KatDwuscienny import policz_kat_dwuscienny as dehydralAngle
+from .KatDwuscienny import policz_kat_dwuscienny as dehydralAngle
 
 
 def calcFiPsi(pos_list, ret_unit="deg"):
@@ -106,6 +106,7 @@ def test4(param1):
     bbStruct = BackboneStructure()
     bbStruct.build_from_atoms(file_pdb.get_backbone())
     bbStruct.quick_info()
+
 
 if __name__ == "__main__":
     test4("6e8z")
