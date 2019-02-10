@@ -1,4 +1,21 @@
+from argparse import ArgumentParser
+from csv import writer
+
 from src.main import get_pdb_info
 
 if __name__ == "__main__":
-    get_pdb_info(input("Podaj 4 znakowy kod białka: "))
+    arg_parser = ArgumentParser()
+    arg_parser.add_argument("--name", type=str)
+    arg_parser.add_argument("--out", default="stdout", type=str)
+
+    args = vars(arg_parser.parse_args())
+
+    data = get_pdb_info(args["name"])
+
+    if args["out"] == "csv":
+        with open("angles/" + args["name"], "w") as f:
+            csv_writer = writer(f, delimiter=" ")
+            csv_writer.writerows([(line["fi"], line["psi"]) for line in data])
+    else:
+        for line in data:
+            print(str(line["fi"]) + " " + str(line["psi"]))

@@ -19,8 +19,7 @@ def get_pdb_info(pdb_name):
     bbStruct = BackboneStructure()
     bbStruct.build_from_atoms(pdb_content.get_backbone())
     fi_psi_list = bbStruct.calculate_fi_psi()
-    for fi_psi in fi_psi_list:
-        print("{fi}\t{psi}".format(**fi_psi))
+    return [angles for angles in fi_psi_list]
 
 
 def get_from_ftp(pdb_name):
