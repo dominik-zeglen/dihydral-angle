@@ -96,18 +96,3 @@ class BackboneStructure:
         else:
             for bbc in self.bbChains:
                 bbc.quick_info(sortBy)
-
-
-def test4(param1):
-    from FilePDB import FilePDB
-
-    file_pdb = FilePDB(param1)
-    file_pdb.loadData()
-    bbStruct = BackboneStructure()
-    bbStruct.build_from_atoms(file_pdb.get_backbone())
-    bbStruct.quick_info()
-
-
-if __name__ == "__main__":
-    test4("6e8z")
-
