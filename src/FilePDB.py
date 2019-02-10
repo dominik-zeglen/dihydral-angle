@@ -7,6 +7,8 @@ Created on 3 lut 2019
 from fileinput import FileInput
 from os import getcwd, path
 
+from .colors import bcolors
+
 
 class FilePDB:
     def __init__(self, pdb_id):
@@ -24,7 +26,11 @@ class FilePDB:
                 self.process_line(line)
             lines.close()
         except (IOError, OSError) as err:
-            print("Nie mozna odczytac pliku {0}!".format(self.fileName))
+            print(
+                bcolors.FAIL
+                + "Nie mozna odczytac pliku {0}!".format(self.fileName)
+                + bcolors.ENDC
+            )
             print(err)
 
     def process_line(self, record_line):

@@ -2,6 +2,7 @@ from argparse import ArgumentParser
 from csv import writer
 
 from src.main import get_pdb_info
+from src.colors import bcolors
 
 if __name__ == "__main__":
     arg_parser = ArgumentParser()
@@ -11,7 +12,7 @@ if __name__ == "__main__":
     args = vars(arg_parser.parse_args())
 
     if not args["name"]:
-        print("It seems like you forgot --name argument")
+        print(bcolors.FAIL + "It seems like you forgot --name argument" + bcolors.ENDC)
     else:
         data = get_pdb_info(args["name"])
         if args["out"] == "csv":
