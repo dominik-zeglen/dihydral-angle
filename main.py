@@ -10,12 +10,14 @@ if __name__ == "__main__":
 
     args = vars(arg_parser.parse_args())
 
-    data = get_pdb_info(args["name"])
-
-    if args["out"] == "csv":
-        with open("angles/" + args["name"], "w") as f:
-            csv_writer = writer(f, delimiter=" ")
-            csv_writer.writerows([(line["fi"], line["psi"]) for line in data])
+    if not args["name"]:
+        print("It seems like you forgot --name argument")
     else:
-        for line in data:
-            print(str(line["fi"]) + " " + str(line["psi"]))
+        data = get_pdb_info(args["name"])
+        if args["out"] == "csv":
+            with open("angles/" + args["name"], "w") as f:
+                csv_writer = writer(f, delimiter=" ")
+                csv_writer.writerows([(line["fi"], line["psi"]) for line in data])
+        else:
+            for line in data:
+                print(str(line["fi"]) + " " + str(line["psi"]))
