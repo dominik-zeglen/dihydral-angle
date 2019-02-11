@@ -13,7 +13,7 @@ to install all packages that are required to run this program.
 After you install packages, you can run program by invoking
 
 ```
-$ python main.py --name <pdb_name> --out <output>
+$ python main.py --name <pdb_name> --out <output> (--info)
 ```
 
-where `<pdb_name>` is the 4-symbol protein code, and `<output>` is either `csv`, `info` or `stdin`. `<output>` is set to `stdin` by default, so you do not have to repeat yourself each time you want to test the command.
+where `<pdb_name>` is the 4-symbol protein code, and `<output>` is either `csv` or `stdin`. `<output>` is set to `stdin` by default, so you do not have to repeat yourself each time you want to test the command. `--info` argument is optional and provides information about selected protein.
