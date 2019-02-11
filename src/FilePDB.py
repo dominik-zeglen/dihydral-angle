@@ -10,6 +10,15 @@ from os import getcwd, path
 from .colors import bcolors
 
 
+def trim_spaces(text):
+    while text[-1] == " ":
+        text = text[:-1]
+    while text[0] == " ":
+        text = text[1:]
+
+    return text
+
+
 class FilePDB:
     def __init__(self, pdb_id):
         self.ID = pdb_id
@@ -19,6 +28,7 @@ class FilePDB:
         self.Atoms = []
         self.Chains = []
         self.SeqRes = {}
+        self.info = {"title": "", "header": "", "source": ""}
 
         try:
             lines = FileInput(self.fileName)
@@ -46,6 +56,24 @@ class FilePDB:
                 "z": record_line[46:54],
             }
             self.add_atom(atom)
+
+        elif record_type == "HEADER":
+            self.info["header"] = (
+                self.info["header"]
+                + ("\n" if len(self.info["header"]) > 0 else "")
+                + trim_spaces(record_line[10:50])
+            )
+
+        elif record_type == "SOURCE":
+            self.info["source"] = self.info["source"] + trim_spaces(record_line[10:79])
+
+        elif record_type == "TITLE ":
+            self.info["title"] = (
+                self.info["header"]
+                + (" " if len(self.info["title"]) else "")
+                + trim_spaces(record_line[10:80])
+            )
+
         elif record_type == "SEQRES":
             serNum = record_line[7:10]
             chainID = record_line[11:12]

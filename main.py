@@ -1,7 +1,7 @@
 from argparse import ArgumentParser
 from csv import writer
 
-from src.main import get_pdb_info
+from src.main import get_pdb_info, get_protein_info
 from src.colors import bcolors
 
 if __name__ == "__main__":
@@ -19,6 +19,8 @@ if __name__ == "__main__":
             with open("angles/" + args["name"], "w") as f:
                 csv_writer = writer(f, delimiter=" ")
                 csv_writer.writerows([(line["fi"], line["psi"]) for line in data])
+        elif args["out"] == "info":
+            print(get_protein_info(args["name"]))
         else:
             for line in data:
                 print(str(line["fi"]) + " " + str(line["psi"]))
