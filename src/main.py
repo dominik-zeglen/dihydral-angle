@@ -29,11 +29,12 @@ def get_from_ftp(pdb_name):
     pdb_path = "/pub/pdb/data/structures/divided/pdb/" + pdb_name[1:3]
     pdb_file_name = "pdb" + pdb_name + ".ent.gz"
 
-    with FTP("ftp.rcsb.org") as ftp:
-        ftp.login()
-        ftp.cwd(pdb_path)
-        with open(TEMP_FILE_NAME, "wb") as temp_file:
-            ftp.retrbinary("RETR " + pdb_file_name, temp_file.write)
+    ftp = FTP("ftp.rcsb.org")
+    ftp.login()
+    ftp.cwd(pdb_path)
+    with open(TEMP_FILE_NAME, "wb") as temp_file:
+        ftp.retrbinary("RETR " + pdb_file_name, temp_file.write)
+    ftp.close()
 
     with gzip.open(TEMP_FILE_NAME) as gz_file:
         with open("data/" + pdb_name + ".pdb", "wb") as pdb_file:
